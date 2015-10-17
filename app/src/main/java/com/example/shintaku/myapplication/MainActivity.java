@@ -43,14 +43,13 @@ public class MainActivity extends Activity {
             JSONObject jobj = new JSONObject();
 
             try {
-                jobj.put("title", "honoka");
-                jobj.put("url", "http://www.google.co.jp");
+                jobj.put("description", "honoka");
+                jobj.put("level", "1");
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-            return postJsonObject("https://railstutorial-ukyankyan-1.c9.io/images.json", jobj);
+            return postJsonObject("https://railstutorial-ukyankyan-1.c9.io/missions.json", jobj);
         }
 
         @Override
@@ -60,6 +59,7 @@ public class MainActivity extends Activity {
             if (result==null) {
                 Toast.makeText(MainActivity.this, "Successfully post json object", Toast.LENGTH_LONG).show();
             }
+            Log.d("result", String.valueOf(result));
         }
 
     }
@@ -112,18 +112,17 @@ public class MainActivity extends Activity {
 
         JSONObject json = null;
         try {
-            Log.d("json",result);
             json = new JSONObject(result);
         } catch (JSONException e) {
             e.printStackTrace();
         }
         // 11. return result
-
+        Log.d("json",String.valueOf(json));
         return json;
     }
 
     private String convertInputStreamToString(InputStream inputStream) throws IOException{
-        BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
         String line = "";
         String result = "";
         while((line = bufferedReader.readLine()) != null)
